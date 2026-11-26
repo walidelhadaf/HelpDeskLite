@@ -44,8 +44,9 @@ class CreateTicketActivity : AppCompatActivity() {
         binding.saveTicket.isEnabled = false
         lifecycleScope.launch {
             try {
-                // TODO Exercise 4: Persist the prepared ticket and return to the catalogue on success.
-                binding.saveTicket.isEnabled = true
+                val repository = (application as HelpDeskApplication).tickets
+                repository.add(ticket)
+                finish()
             } catch (cancelled: CancellationException) {
                 throw cancelled
             } catch (_: Exception) {
